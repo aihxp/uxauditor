@@ -40,15 +40,24 @@ cd uxauditor
 
 ### Option B: from a release download
 
-Download `uxauditor-1.0.0.zip` (or `.tar.gz`) from the [latest release](https://github.com/aihxp/uxauditor/releases/latest), then:
+Download the `.zip` (or `.tar.gz`) for the [latest release](https://github.com/aihxp/uxauditor/releases/latest), then unzip it, `cd` into the extracted `uxauditor-<version>` directory, and run the installer. The wildcards below match whichever version you downloaded:
 
 ```sh
-unzip uxauditor-1.0.0.zip
-cd uxauditor-1.0.0
+unzip uxauditor-*.zip
+cd uxauditor-*/
 ./install.sh
 ```
 
-Re-run `./install.sh` any time after editing the engine to re-sync every tool. Run `./install.sh uninstall` to remove it from every tool.
+Other commands:
+
+```sh
+./install.sh --dry-run   # preview what would be written, without writing
+./install.sh list        # show what is installed in each detected tool
+./install.sh uninstall   # remove it from every tool
+./install.sh --help      # full usage, including which directories are detected
+```
+
+Re-run `./install.sh` any time after editing the engine to re-sync every tool.
 
 ## How to run it
 
@@ -105,6 +114,7 @@ uxauditor/
   engine/
     uxauditor.md        the complete, tool-neutral skill (the one source of truth)
   install.sh            detects installed tools and renders the engine into each
+  VERSION               the current version, read by install.sh --version
   AGENTS.md             portable directive for any AGENTS.md-aware tool, plus repo notes
   README.md             this file
   CONTRIBUTING.md       how to contribute (edit the engine, re-run the installer)

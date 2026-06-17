@@ -53,9 +53,9 @@ Options:
   -v, --version    print the version and exit
 
 Detection looks under \$HOME (for example ~/.claude, ~/.codex, ~/.gemini,
-~/.cursor, ~/.antigravity, ~/.pi, ~/.windsurf, ~/.config/opencode). A tool kept
-in a non-standard location is not detected; for those, copy engine/uxauditor.md
-into the tool's command or prompt directory (see AGENTS.md).
+~/.cursor, ~/.antigravity, ~/.pi, ~/.windsurf), plus \${XDG_CONFIG_HOME:-~/.config}/opencode.
+A tool kept in a non-standard location is not detected; for those, copy
+engine/uxauditor.md into the tool's command or prompt directory (see AGENTS.md).
 EOF
 }
 
@@ -118,7 +118,8 @@ detect "$HOME/.antigravity"        "Antigravity"                   && emit_skill
 detect "$HOME/.gemini/antigravity" "Antigravity (gemini profile)"  && { emit_skill "$HOME/.gemini/antigravity/skills"; emit_cmd "$HOME/.gemini/antigravity/commands"; }
 detect "$HOME/.pi"                 "pi (pi.dev)"                   && emit_pi_skill "$HOME/.pi/skills"
 detect "$HOME/.windsurf"           "Windsurf"                      && emit_cmd "$HOME/.windsurf/commands"
-detect "$HOME/.config/opencode"    "opencode"                      && emit_opencode_cmd "$HOME/.config/opencode/command"
+OPENCODE_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"   # opencode honors XDG_CONFIG_HOME
+detect "$OPENCODE_DIR"             "opencode"                      && emit_opencode_cmd "$OPENCODE_DIR/command"
 
 echo ""
 
@@ -127,7 +128,7 @@ echo ""
 if [ ${#detected[@]} -eq 0 ]; then
   echo "No supported AI coding tools were detected under \$HOME."
   echo "Looked for: ~/.claude, ~/.codex, ~/.gemini, ~/.cursor, ~/.antigravity,"
-  echo "            ~/.gemini/antigravity, ~/.pi, ~/.windsurf, ~/.config/opencode"
+  echo "            ~/.gemini/antigravity, ~/.pi, ~/.windsurf, $OPENCODE_DIR"
   echo ""
   echo "Next: open the AI tool once so it creates its config directory, then re-run"
   echo "this installer. For a tool kept elsewhere or not listed, copy"
