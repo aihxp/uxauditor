@@ -30,6 +30,14 @@ It scores each lens against an explicit rubric, clusters repeated issues into ro
 
 uxauditor is a skill, so installing it means rendering it into your AI tools' skill and command directories. The installer detects which tools you have under your home directory and writes the correct file for each. Only tools you actually have are touched.
 
+### Quickest: npx (no clone)
+
+```sh
+npx uxauditor
+```
+
+This fetches uxauditor and renders it into every detected AI tool in one step. Then `npx uxauditor list` shows what is installed, `npx uxauditor --dry-run` previews without writing, and `npx uxauditor uninstall` removes it. Requires Node (for `npx`) and bash.
+
 ### Option A: from source
 
 ```sh

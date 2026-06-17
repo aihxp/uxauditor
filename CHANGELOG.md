@@ -11,6 +11,8 @@ zero. No change to the audit engine or its output; this release is entirely
 about the install/inspect command-line experience.
 
 ### Added
+- Published to npm: `npx uxauditor` runs the installer without cloning the repo
+  (`package.json` exposes `install.sh` as the `uxauditor` bin).
 - `install.sh` now has a real command-line interface: `--help`/`-h` (prints usage
   and exits), `--version`/`-v`, `--dry-run`/`-n` (preview the would-write targets
   without writing), and `list`/`status` (show what is installed in each detected
